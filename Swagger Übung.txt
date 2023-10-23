@@ -1,0 +1,118 @@
+Swagger Übung
+
+
+
+Wissenswertes zur Vorbereitung:
+
+1) URL: editor.swagger.io
+2) Um dir eine Schnittstellenbeschreibung im Detail anzusehen musst du auf die Schnittstelle clicken um sie auszuklappen
+3) Um eine Schnittstelle zu benutzen/zu testen musst du auf den Button "Try it out" clicken
+4) Bitte verwende bei allen Schnittstellen wo es möglich ist JSON als Request und Response Type. Dazu bei allen Schnittstellen als Response Content Type application/json auswählen. Bei POST und PUT Schnittstellen mit explizitem Body als Parameter Content Type ebenfalls application/json auswählen
+
+
+
+
+Übungsbeispiele
+
+
+
+I) Pets
+1)
+Lass dir alle Tiere anzeigen, die den Status "sold" haben.
+Schnittstelle: GET /pet/findByStatus.
+Wie heißt das letzte dieser Tiere?
+
+2)
+Suche das Tier mit der id 7007.
+Schnittstelle: GET /pet/{petId}
+Welchen Antwortcode bekommst du vom Server?
+
+3)
+Mit welcher Schnittstelle kann man Tiere zum Shop hinzufügen?
+
+4)
+Welche sind die Pflichtparameter bei der Schnittstelle POST /pet?
+Tipp: Sieh dir unter "Body" das Model der Schnittstelle an.
+
+5)
+Lege ein neues Tier im Shop an und speichere dir die id des Tiers, die du im Response Body ablesen kannst. 
+Tipp: Die Anlage war dann erfolgreich, wenn du als ResponseCode 200 erhältst.
+Verwende als Body 
+{
+  "name": "[DeinName] Pet"
+}
+Schnittstelle: POST /pet
+Hinweis: PhotoUrl ist als Pflichtparameter definiert, wird aber vom Testsystem automatisch befüllt (mit dem Wert der leeren Menge).
+
+6)
+Suche dein Tier über die passende Schnittstelle anhand der id.
+Lösung: Schnittstelle GET /pet/{petId}
+Zusatzfrage: Welche Felder wurden für dein Tier vom System automatisch befüllt?
+
+
+7)
+Versuche dein Tier in mehreren Schritten upzudaten:
+7.1) Ändere den Namen deines Tiers
+7.2) Ändere den status deines Tiers. Sieh dir dazu im Model der Schnittstelle an, welche Status erlaubt sind!
+7.3) Füge deinem Tier ein Tag hinzu. Merke dir den Tag!
+
+
+8) Sieh dir die ausgegraute Schnittstelle GET /pet/findByTags genau an.
+Links oben steht in der Schnittstellenbeschreibung "Warning: Deprecated". 
+8.1) Was bedeutet das und warum könnte diese Schnittstelle als deprecated markiert worden sein?
+8.2) Suche in dieser Schnittstelle den Tag, den du unter 7.3) deinem Tier hinzugefügt hast. Kannst du es damit wiederfinden?
+
+
+9) Lösche dein Tier wieder. Nachdem du es erfolgreich gelöscht hast (ResponseCode 200 nach dem Call)
+Schnittstelle: DELETE /pet/{petId}
+
+
+10) Verifiziere, dass dein Tier wirklich gelöscht wurde.
+Tipp: Wir sind Tester - nur weil uns die Schnittstelle DELETE den Status Code 200 geliefert hat, wissen wir noch nicht wirklich, dass das System das Tier auch wirklich gelöscht hat. Wie könnte man das verifizieren?
+
+
+
+
+II) Users:
+Als Tester bekommen wir selten so exakte Akzeptanzkriterien wie im Übungspunkt I. Nachstehend etwas realitätsnähere Beispiele.
+Teste die Punkte nach bestem Wissen und Gewissen.
+Notiere dir die einzelnen Schritte die du durchgeführt hast, wir besprechen sie nachher im Detail.
+
+1) Lege einen User an
+Schnittstelle: POST user
+
+2) Suche einen User nach Namen
+Schnittstelle: GET user/username
+
+3) Logge einen User ein und wieder aus:
+Schnittstellen: Login, Logout
+
+4) Update einen User
+Schnittstelle: PUT user
+
+5) Lösche einen User, Negativ- und Positivtestfall!
+
+
+
+
+III) YAML
+Für Technikbegeisterte.
+Als Tester haben wir mit den Definitionsdokumenten (.yaml files) meistens wenig zu tun, sie werden von den Programmierern erstellt und gewartet. Manchmal müssen wir sie aber lesen und verstehen können oder auch die Beschreibung selbst aktualisieren.
+Auf der linken Seite sehen wir das komplette yaml für die API, die wir gerade getestet haben.
+
+
+1) Zum einarbeiten: Sieh dir die Zeilen 158-185 im yaml an. Hier wird die Schnittstelle GET /pet/{petId} beschrieben (wie in Zeile 158-159 zu sehen ist).
+
+2) Ändere die Summary (Zeile 162) beliebig und sieh dir an wie sich die Schnittstelle rechts ändert.
+
+3) Ändere nun auch den Pfad (Zeile 158)... zB auf /pet/{petId}/test
+4) Sieh dir nach dieser Änderung an, wie sich auch die POST und DELETE Schnittstelle mit diesem Pfad geändert haben
+
+5) Ändere die definierten Responses (zB in Zeile 182+183 den Responsecode und die Beschreibung)
+
+6) Wenn du das Prinzip verstanden hast, versuche einen komplett neuen Responsecode hinzuzufügen!
+
+7) In welchen Zeilen befindet sich die Beschreibung für die Schnittstelle POST /store/order
+
+8) Ändere die Schnittstelle GET /pet/findByTags so, dass sie nicht mehr deprecated ist
+Hinweis: Versuche herauszufinden wie das funktionieren könnte. Die Lösung funktioniert im Beispiel allerdings nicht!
